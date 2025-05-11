@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import SMS from "../icons/Sms"; 
+import SMSNotificationLttr from "../icons/SMSNotificationLttr";
 
 export default function AnimatedSMS() {
   const smsRef = useRef(null);
@@ -39,6 +40,15 @@ export default function AnimatedSMS() {
           ease: "sine.out",
         },
         "-=0.3"
+      )
+      .from(
+        root.querySelector("#smsLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
       )
       .add(() => {
         gsap.to("#SMS__phone", {
@@ -83,7 +93,10 @@ export default function AnimatedSMS() {
 
   return (
     <div ref={smsRef} className="flex flex-col items-center">
-      <SMS />
+      <SMS className="z-[1]"/>
+        <div className="absolute w-[83%] h-[83%] top-[25%] left-[20%] aspect-square origin-center">
+          <SMSNotificationLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

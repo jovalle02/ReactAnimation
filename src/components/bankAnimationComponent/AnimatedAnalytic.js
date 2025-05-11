@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Analytic from "../icons/Analytic"; // Ajusta la ruta si es necesario
+import AnalyticLttr from "../icons/AnalyticsLttr";
 
 export default function AnimatedAnalytic() {
   const analyticRef = useRef(null);
@@ -91,6 +92,15 @@ export default function AnimatedAnalytic() {
         },
         "-=0.4"
       )
+      .from(
+        root.querySelector("#analyticsLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
       .add(() => {
 
         gsap.to("#Analytic__piechart", {
@@ -162,7 +172,10 @@ export default function AnimatedAnalytic() {
 
   return (
     <div ref={analyticRef} className="flex flex-col items-center">
-      <Analytic />
+      <Analytic className="z-[1]"/>
+        <div className=" absolute w-[50%] h-[50%] top-[48%] left-[60%] aspect-square  origin-center">
+          <AnalyticLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import CloudBanks from "../icons/CloudBanks"; // Adjust path if needed
+import FinancialCloudLttr from "../icons/FinancialCloudLttr";
 
 export default function AnimatedCloudBanks() {
   const cloudRef = useRef(null);
@@ -28,7 +29,17 @@ export default function AnimatedCloudBanks() {
           ease: "back.out(1.7)",
         },
         "+=0.1"
-      ).add(() => {
+      )
+      .from(
+        root.querySelector("#financialLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
+      .add(() => {
         gsap.to("#CloudBanks__cloud", {
           y: "-=2",
           duration: 1.5,
@@ -56,7 +67,10 @@ export default function AnimatedCloudBanks() {
 
   return (
     <div ref={cloudRef} className="flex flex-col items-center">
-      <CloudBanks />
+      <CloudBanks className="z-[1]"/>
+        <div className="absolute w-[74%] h-[74%] top-[25%] left-[26%] aspect-square origin-center">
+          <FinancialCloudLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

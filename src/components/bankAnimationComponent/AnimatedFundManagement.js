@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import FundManagement from "../icons/FundManagement"; // Adjust path if needed
+import FundManagementLttr from "../icons/FundManagementLttr";
 
 export default function AnimatedFundManagement() {
   const fundRef = useRef(null);
@@ -38,7 +39,17 @@ export default function AnimatedFundManagement() {
           ease: "power2.out",
         },
         "-=0.3"
-      ).add(() => {
+      )
+      .from(
+        root.querySelector("#fundLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
+      .add(() => {
         gsap.to("#FundManagement__managementcard", {
           y: "-=2",
           duration: 1.5,
@@ -82,7 +93,10 @@ export default function AnimatedFundManagement() {
 
   return (
     <div ref={fundRef} className="flex flex-col items-center">
-      <FundManagement />
+      <FundManagement className="z-[1]"/>
+        <div className="absolute w-[84%] h-[84%] top-[27%] left-[20%] aspect-square origin-center">
+          <FundManagementLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CreditCardss } from "../icons";
+import CreditLttr from "../icons/CreditLttr";
 
 export default function AnimatedCreditCard() {
   const creditRef = useRef(null);
@@ -52,7 +53,17 @@ export default function AnimatedCreditCard() {
           ease: "power2.out",
         },
         "+=0.1"
-      ).add(() => {
+      )
+      .from(
+        root.querySelector("#creditLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
+      .add(() => {
         gsap.to("#CreditCardss__1card", {
           y: "-=5",
           duration: 1.5,
@@ -103,7 +114,10 @@ export default function AnimatedCreditCard() {
 
   return (
     <div ref={creditRef} className="flex flex-col items-center">
-      <CreditCardss />
+      <CreditCardss className="z-[1]"/>
+        <div className="absolute w-[35%] h-[33%] top-[80%] left-[3%] aspect-square origin-center">
+          <CreditLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

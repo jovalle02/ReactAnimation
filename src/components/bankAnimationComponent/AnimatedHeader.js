@@ -71,7 +71,7 @@ export default function AnimatedHeader() {
         <AnimatedCreditCard />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.mobile} top="-3%" left="23%" >
+      <PositionedIcon innerRef={refs.mobile} top="-6%" left="23%" >
         <AnimatedPayApp />
       </PositionedIcon>
 
@@ -116,7 +116,7 @@ export default function AnimatedHeader() {
         </div>
       </div>
 
-      <div className="absolute w-[140%] h-[140%]  top-[-28%] left-[-32%] flex items-center justify-center z-[0]">
+      <div className="absolute w-[140%] h-[140%]  top-[-26%] left-[-32%] flex items-center justify-center z-[0]">
         <div className="w-[100%] h-[100%] aspect-square top-0 left-0 origin-center">
           <AnimatedCircleGrid className="w-full h-full" />
         </div>

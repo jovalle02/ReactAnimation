@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Mac from "../icons/Mac";
+import AccountProtectionLttr from "../icons/AccountProtectionLttr";
 
 export default function AnimatedMac() {
   const macRef = useRef(null);
@@ -41,6 +42,15 @@ export default function AnimatedMac() {
         },
         "-=0.4"
       )
+      .from(
+        root.querySelector("#accountLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
       .add(() => {
         gsap.to("#Mac__computer", {
           y: "-=4",
@@ -76,7 +86,10 @@ export default function AnimatedMac() {
 
   return (
     <div ref={macRef} className="flex flex-col items-center">
-      <Mac />
+      <Mac className="z-[1]"/>
+        <div className="absolute w-[83%] h-[83%] top-[17%] left-[50%] aspect-square origin-center">
+          <AccountProtectionLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import DigitalWallet from "../icons/DigitalWallet"; // Adjust path if needed
+import DigitalWalletLttr from "../icons/DigitalWalletLttr";
 
 export default function AnimatedDigitalWallet() {
   const walletRef = useRef(null);
@@ -64,6 +65,16 @@ export default function AnimatedDigitalWallet() {
       "-=0.2"
     );
 
+    tl.from(
+        root.querySelector("#digitalLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+    );
+
     tl.add(() => {
       gsap.to("#DigitalWallet__btnpaydigital", {
         y: "-=3",
@@ -123,7 +134,10 @@ export default function AnimatedDigitalWallet() {
 
   return (
     <div ref={walletRef} className="flex flex-col items-center overflow-visible">
-      <DigitalWallet />
+      <DigitalWallet className="z-[1]"/>
+        <div className="absolute w-[70%] h-[70%] top-[45%] left-[40%] aspect-square origin-center">
+          <DigitalWalletLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import LockCard from "../icons/LockCard";
+import PaymentSecurityLttr from "../icons/PaymentSecurityLttr";
 
 export default function AnimatedLockCard() {
   const lockCardRef = useRef(null);
@@ -31,6 +32,15 @@ export default function AnimatedLockCard() {
         },
         "-=0.3"
       )
+      .from(
+        root.querySelector("#paymentLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
       .add(() => {
         gsap.to("#LockCard__Group\\ 1", {
           y: "-=3",
@@ -58,7 +68,10 @@ export default function AnimatedLockCard() {
 
   return (
     <div ref={lockCardRef} className="flex flex-col items-center overflow-visible">
-      <LockCard />
+      <LockCard className="z-[1]"/>
+        <div className="absolute w-[80%] h-[80%] top-[32%] left-[0%] aspect-square origin-center">
+          <PaymentSecurityLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

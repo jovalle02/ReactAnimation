@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import PayApp from "../icons/PayApp"; // Ajusta el path si es necesario
+import MobilePaymentLttr from "../icons/MobilePaymentLttr";
 
 export default function AnimatedPayApp() {
   const payAppRef = useRef(null);
@@ -71,7 +72,16 @@ export default function AnimatedPayApp() {
         },
         "-=0.2"
       )
-            .add(() => {
+      .from(
+        root.querySelector("#mobileLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
+      .add(() => {
         gsap.to("#PayApp__creditcard", {
           y: "-=1",
           duration: 1.5,
@@ -139,7 +149,10 @@ export default function AnimatedPayApp() {
 
   return (
     <div ref={payAppRef} className="flex flex-col items-center">
-      <PayApp />
+      <PayApp className="z-[1]"/>
+        <div className="absolute w-[70%] h-[70%] top-[35%] left-[50%] aspect-square origin-center">
+          <MobilePaymentLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Exchange from "../icons/Exchange"; // Adjust path as needed
+import CurrencyTransferLttr from "../icons/CurrencyTransferLttr";
 
 export default function AnimatedExchange() {
   const exchangeRef = useRef(null);
@@ -44,6 +45,16 @@ export default function AnimatedExchange() {
       },
       "-=0.1"
     );
+
+    tl.from(
+        root.querySelector("#currencyLttr"),
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      )
 
     tl.add(() => {
       gsap.to("#Exchange__arrow", {
@@ -92,7 +103,10 @@ export default function AnimatedExchange() {
 
   return (
     <div ref={exchangeRef} className="flex flex-col items-center overflow-visible">
-      <Exchange />
+      <Exchange className="z-[1]"/>
+        <div className="absolute w-[85%] h-[85%] top-[10%] left-[50%] aspect-square origin-center">
+          <CurrencyTransferLttr className="w-[100%] h-[100%]"/>
+        </div>
     </div>
   );
 }
