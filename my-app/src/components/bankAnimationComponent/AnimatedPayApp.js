@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import PayApp from "./icons/PayApp"; // Ajusta el path si es necesario
+import PayApp from "../icons/PayApp"; // Ajusta el path si es necesario
 
 export default function AnimatedPayApp() {
   const payAppRef = useRef(null);
@@ -11,7 +11,7 @@ export default function AnimatedPayApp() {
     const root = payAppRef.current;
     if (!root) return;
 
-    const tl = gsap.timeline().delay(2);
+    const tl = gsap.timeline().delay(1);
 
     tl.from(root.querySelector("#PayApp__cc3"), {
       opacity: 0,
@@ -120,13 +120,26 @@ export default function AnimatedPayApp() {
           repeat: -1,
         });
       });
+
+      const dash = root.querySelector("#PayApp__PayApp");
+      dash.addEventListener("mouseenter", () => {
+        gsap.to(dash, {
+          filter: "drop-shadow(0 0 2px #ffffff)",
+          duration: 0.3,
+        });
+      });
+      dash.addEventListener("mouseleave", () => {
+        gsap.to(dash, {
+          filter: "none",
+          duration: 0.3,
+        });
+      });
   }, []);
 
 
   return (
     <div ref={payAppRef} className="flex flex-col items-center">
       <PayApp />
-      <span className="text-xs mt-1 text-white">PAYMENT APP</span>
     </div>
   );
 }

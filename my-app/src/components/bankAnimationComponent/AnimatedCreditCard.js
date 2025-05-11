@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { CreditCardss } from "./icons"; // Adjust the import path as needed
+import { CreditCardss } from "../icons";
 
 export default function AnimatedCreditCard() {
   const creditRef = useRef(null);
@@ -12,7 +12,7 @@ export default function AnimatedCreditCard() {
 
     if (!root) return;
 
-    const tl = gsap.timeline().delay(0.9);
+    const tl = gsap.timeline().delay(1);
 
     tl.from(root.querySelector("#CreditCardss__3card"), {
       opacity: 0,
@@ -52,13 +52,58 @@ export default function AnimatedCreditCard() {
           ease: "power2.out",
         },
         "+=0.1"
-      );
+      ).add(() => {
+        gsap.to("#CreditCardss__1card", {
+          y: "-=5",
+          duration: 1.5,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#CreditCardss__2card", {
+          y: "-=3",
+          duration: 1.8,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#CreditCardss__3card", {
+          y: "-=3",
+          duration: 1.8,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#CreditCardss__frontcard", {
+          y: "-=3",
+          duration: 1.4,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      });
+
+      const dash = root.querySelector("#CreditCardss__CreditCardss");
+      dash.addEventListener("mouseenter", () => {
+        gsap.to(dash, {
+          filter: "drop-shadow(0 0 2px #ffffff)",
+          duration: 0.3,
+        });
+      });
+      dash.addEventListener("mouseleave", () => {
+        gsap.to(dash, {
+          filter: "none",
+          duration: 0.3,
+        });
+      });
   }, []);
 
   return (
     <div ref={creditRef} className="flex flex-col items-center">
       <CreditCardss />
-      <span className="text-xs mt-1 text-white">CREDIT</span>
     </div>
   );
 }

@@ -1,0 +1,89 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import SMS from "../icons/Sms"; 
+
+export default function AnimatedSMS() {
+  const smsRef = useRef(null);
+
+  useEffect(() => {
+    const root = smsRef.current;
+    if (!root) return;
+
+    const tl = gsap.timeline().delay(1);
+
+    tl.from(root.querySelector("#SMS__phone"), {
+      opacity: 0,
+      x: -15,
+      duration: 0.6,
+      ease: "power2.out",
+    })
+      .from(
+        root.querySelector("#SMS__securecodescreen"),
+        {
+          opacity: 0,
+          scale: 0.85,
+          transformOrigin: "center center",
+          duration: 0.5,
+          ease: "back.out(1.4)",
+        },
+        "-=0.3"
+      )
+      .from(
+        root.querySelector("#SMS__Vector"),
+        {
+          opacity: 0,
+          x: -10,
+          duration: 0.4,
+          ease: "sine.out",
+        },
+        "-=0.3"
+      )
+      .add(() => {
+        gsap.to("#SMS__phone", {
+          y: "-=4",
+          duration: 1.5,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#SMS__securecodescreen", {
+          y: "-=4",
+          duration: 1.5,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#SMS__Vector", {
+          y: "-=4",
+          duration: 1.5,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      });
+
+      const dash = root.querySelector("#SMS__SMS");
+      dash.addEventListener("mouseenter", () => {
+        gsap.to(dash, {
+          filter: "drop-shadow(0 0 2px #ffffff)",
+          duration: 0.3,
+        });
+      });
+      dash.addEventListener("mouseleave", () => {
+        gsap.to(dash, {
+          filter: "none",
+          duration: 0.3,
+        });
+      });
+  }, []);
+
+  return (
+    <div ref={smsRef} className="flex flex-col items-center">
+      <SMS />
+    </div>
+  );
+}

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Analytic from "./icons/Analytic"; // Ajusta la ruta si es necesario
+import Analytic from "../icons/Analytic"; // Ajusta la ruta si es necesario
 
 export default function AnimatedAnalytic() {
   const analyticRef = useRef(null);
@@ -11,7 +11,7 @@ export default function AnimatedAnalytic() {
     const root = analyticRef.current;
     if (!root) return;
 
-    const tl = gsap.timeline().delay(0.2);
+    const tl = gsap.timeline().delay(1);
 
     tl.from(root.querySelector("#Analytic__phoneanalytic"), {
       opacity: 0,
@@ -120,12 +120,25 @@ export default function AnimatedAnalytic() {
 
 
       });
+
+      const dash = root.querySelector("#Analytic__Analytic");
+      dash.addEventListener("mouseenter", () => {
+        gsap.to(dash, {
+          filter: "drop-shadow(0 0 2px #ffffff)",
+          duration: 0.3,
+        });
+      });
+      dash.addEventListener("mouseleave", () => {
+        gsap.to(dash, {
+          filter: "none",
+          duration: 0.3,
+        });
+      });
   }, []);
 
   return (
     <div ref={analyticRef} className="flex flex-col items-center">
       <Analytic />
-      <span className="text-xs mt-1 text-white">DASHBOARD ANALYTICS</span>
     </div>
   );
 }
