@@ -94,7 +94,7 @@ export default function AnimatedAnalytic() {
       .add(() => {
 
         gsap.to("#Analytic__piechart", {
-          y: "-=1.5",
+          y: "-=1",
           duration: 1.5,
           ease: "sine.inOut",
           yoyo: true,
@@ -102,7 +102,7 @@ export default function AnimatedAnalytic() {
         });
 
         gsap.to("#Analytic__dashanalytic", {
-          y: "-=0.5",
+          y: "-=1",
           duration: 1.2,
           ease: "sine.inOut",
           yoyo: true,
@@ -110,9 +110,33 @@ export default function AnimatedAnalytic() {
         });
 
 
-        gsap.to("#Analytic__piechart", {
-          y: "-=1.5",
-          duration: 1.5,
+        gsap.to("#Analytic__backcurve", {
+          y: "-=1",
+          duration: 1.6,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#Analytic__thrdcurve", {
+          y: "-=1",
+          duration: 1.6,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#Analytic__sndcurve", {
+          y: "-=1",
+          duration: 1.2,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#Analytic_frontcurve", {
+          y: "-=1",
+          duration: 1,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,

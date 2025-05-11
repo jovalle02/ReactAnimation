@@ -81,7 +81,7 @@ export default function AnimatedPayApp() {
         });
 
         gsap.to("#PayApp__paybtn", {
-          y: "-=1",
+          y: "-=3",
           duration: 1.4,
           ease: "sine.inOut",
           yoyo: true,
@@ -89,7 +89,7 @@ export default function AnimatedPayApp() {
         });
 
         gsap.to("#PayApp__inputmoney", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.8,
           ease: "sine.inOut",
           yoyo: true,
@@ -97,7 +97,7 @@ export default function AnimatedPayApp() {
         });
 
         gsap.to("#PayApp__cc3", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.7,
           ease: "sine.inOut",
           yoyo: true,
@@ -105,7 +105,7 @@ export default function AnimatedPayApp() {
         });
 
         gsap.to("#PayApp__cc2", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.6,
           ease: "sine.inOut",
           yoyo: true,
@@ -113,7 +113,7 @@ export default function AnimatedPayApp() {
         });
 
         gsap.to("#PayApp__cc1", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.5,
           ease: "sine.inOut",
           yoyo: true,

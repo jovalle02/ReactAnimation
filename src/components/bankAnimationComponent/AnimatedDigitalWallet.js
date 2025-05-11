@@ -66,7 +66,39 @@ export default function AnimatedDigitalWallet() {
 
     tl.add(() => {
       gsap.to("#DigitalWallet__btnpaydigital", {
-        y: "-=2",
+        y: "-=3",
+        duration: 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+
+      gsap.to("#DigitalWallet__mainscreenwallet", {
+        y: "-=3",
+        duration: 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+
+      gsap.to("#DigitalWallet__middlescreen", {
+        y: "-=3",
+        duration: 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+
+      gsap.to("#DigitalWallet__keyboard", {
+        y: "-=3",
+        duration: 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+
+      gsap.to("#DigitalWallet__screenlaptop", {
+        y: "-=3",
         duration: 1.5,
         ease: "sine.inOut",
         yoyo: true,

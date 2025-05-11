@@ -33,7 +33,7 @@ export default function AnimatedLockCard() {
       )
       .add(() => {
         gsap.to("#LockCard__Group\\ 1", {
-          y: "-=2",
+          y: "-=3",
           duration: 1.5,
           ease: "sine.inOut",
           yoyo: true,

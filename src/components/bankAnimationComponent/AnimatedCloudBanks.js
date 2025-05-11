@@ -30,7 +30,7 @@ export default function AnimatedCloudBanks() {
         "+=0.1"
       ).add(() => {
         gsap.to("#CloudBanks__cloud", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.5,
           ease: "sine.inOut",
           yoyo: true,

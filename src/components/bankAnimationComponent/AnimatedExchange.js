@@ -45,11 +45,30 @@ export default function AnimatedExchange() {
       "-=0.1"
     );
 
-    // Add levitating arrow effect after animations
     tl.add(() => {
       gsap.to("#Exchange__arrow", {
-        y: "-=1",
+        y: "-=2",
         duration: 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+    });
+
+    tl.add(() => {
+      gsap.to("#Exchange__ccbigcard", {
+        y: "-=1.5",
+        duration: 1,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+    });
+
+    tl.add(() => {
+      gsap.to("#Exchange__coins", {
+        y: "-=2",
+        duration: 1.2,
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,

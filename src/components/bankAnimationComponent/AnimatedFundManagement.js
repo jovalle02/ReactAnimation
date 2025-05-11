@@ -40,7 +40,7 @@ export default function AnimatedFundManagement() {
         "-=0.3"
       ).add(() => {
         gsap.to("#FundManagement__managementcard", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.5,
           ease: "sine.inOut",
           yoyo: true,
@@ -48,7 +48,7 @@ export default function AnimatedFundManagement() {
         });
 
         gsap.to("#FundManagement__secondmanagementcard", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.8,
           ease: "sine.inOut",
           yoyo: true,
@@ -56,7 +56,7 @@ export default function AnimatedFundManagement() {
         });
 
         gsap.to("#FundManagement__thirdmanagementcard", {
-          y: "-=1",
+          y: "-=2",
           duration: 1.2,
           ease: "sine.inOut",
           yoyo: true,

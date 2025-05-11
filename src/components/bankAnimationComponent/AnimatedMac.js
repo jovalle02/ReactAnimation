@@ -43,8 +43,16 @@ export default function AnimatedMac() {
       )
       .add(() => {
         gsap.to("#Mac__computer", {
-          y: "-=3",
+          y: "-=4",
           duration: 1.8,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        gsap.to("#Mac__keyboard", {
+          y: "-=2",
+          duration: 1.3,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
