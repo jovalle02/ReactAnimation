@@ -1,10 +1,12 @@
 import AnimatedHeader from "@/components/bankAnimationComponent/AnimatedHeader";
+import CICDPipelineSection from "@/components/cidiSectionComponent/CICDPipelineSection";
 import TestResultsSection from "@/components/exampleComponent/TestResultSection";
 
 export default function Home() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}>
+    <div style={{ justifyContent: 'center', marginTop: '4rem' }}>
       <TestResultsSection />
+      <CICDPipelineSection />
     </div>
   );
 }

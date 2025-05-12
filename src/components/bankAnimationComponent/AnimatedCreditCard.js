@@ -96,20 +96,6 @@ export default function AnimatedCreditCard() {
           repeat: -1,
         });
       });
-
-      const dash = root.querySelector("#CreditCardss__CreditCardss");
-      dash.addEventListener("mouseenter", () => {
-        gsap.to(dash, {
-          filter: "drop-shadow(0 0 2px #ffffff)",
-          duration: 0.3,
-        });
-      });
-      dash.addEventListener("mouseleave", () => {
-        gsap.to(dash, {
-          filter: "none",
-          duration: 0.3,
-        });
-      });
   }, []);
 
   return (

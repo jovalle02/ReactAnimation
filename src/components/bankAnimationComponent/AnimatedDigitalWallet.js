@@ -117,19 +117,6 @@ export default function AnimatedDigitalWallet() {
       });
     });
 
-    const dash = root.querySelector("#DigitalWallet__DigitalWallet");
-    dash.addEventListener("mouseenter", () => {
-        gsap.to(dash, {
-          filter: "drop-shadow(0 0 2px #ffffff)",
-          duration: 0.3,
-        });
-      });
-    dash.addEventListener("mouseleave", () => {
-        gsap.to(dash, {
-          filter: "none",
-          duration: 0.3,
-      });
-    });
   }, []);
 
   return (

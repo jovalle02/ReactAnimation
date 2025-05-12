@@ -70,7 +70,7 @@ export default function TestResultsSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto mt-8">
         <div className="flex justify-center items-center w-full h-full mt-5">
-          <div className="w-full max-w-[700px] aspect-square ml-[20%]">
+          <div className="w-full max-w-[700px] aspect-square ml-[20%] animated-header-trigger">
             <AnimatedHeader />
           </div>
         </div>

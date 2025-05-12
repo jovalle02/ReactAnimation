@@ -144,7 +144,7 @@ export default function AnimatedAnalytic() {
           repeat: -1,
         });
 
-        gsap.to("#Analytic_frontcurve", {
+        gsap.to("#Analytic__frontcurve", {
           y: "-=1",
           duration: 1,
           ease: "sine.inOut",
@@ -155,19 +155,6 @@ export default function AnimatedAnalytic() {
 
       });
 
-      const dash = root.querySelector("#Analytic__Analytic");
-      dash.addEventListener("mouseenter", () => {
-        gsap.to(dash, {
-          filter: "drop-shadow(0 0 2px #ffffff)",
-          duration: 0.3,
-        });
-      });
-      dash.addEventListener("mouseleave", () => {
-        gsap.to(dash, {
-          filter: "none",
-          duration: 0.3,
-        });
-      });
   }, []);
 
   return (

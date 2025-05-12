@@ -9,7 +9,7 @@ const SvgSms = (props) => (
     {...props}
   >
     <g id="SMS__SMS">
-      <g id="SMS__phone" filter="url(#SMS__filter0_d_0_1)">
+      <g id="SMS__phone" filter="url(#SMS__filter0_d_3_77)">
         <path
           id="SMS__Vector 17"
           d="M35 80.1124V18.7361C35 17.9785 35.428 17.286 36.1056 16.9472L61.1056 4.44721C62.4354 3.78231 64 4.74931 64 6.23607V66.3192C64 67.0477 63.604 67.7185 62.9662 68.0704L37.9662 81.8635C36.6332 82.5989 35 81.6347 35 80.1124Z"
@@ -28,7 +28,7 @@ const SvgSms = (props) => (
           strokeWidth={0.5}
         />
       </g>
-      <g id="SMS__securecodescreen" filter="url(#SMS__filter1_d_0_1)">
+      <g id="SMS__securecodescreen" filter="url(#SMS__filter1_d_3_77)">
         <path d="M43 77.5V25L71.5 9V61.5L43 77.5Z" fill="#8196DA" />
         <path d="M71.5 14L43 30V25L71.5 9V14Z" fill="#6D80BC" />
         <path
@@ -72,7 +72,7 @@ const SvgSms = (props) => (
           fill="white"
         />
       </g>
-      <g id="SMS__Vector" filter="url(#SMS__filter2_d_0_1)">
+      <g id="SMS__Vector" filter="url(#SMS__filter2_d_3_77)">
         <path d="M81 28L51 45V63.5L81 47V28Z" fill="#CC9000" />
         <path d="M54 56V34.5L77.5 21V42.5L54 56Z" fill="white" />
         <path d="M68.5 45H51L51.5 63L81 46.5V29L68.5 45Z" fill="#F7BD1F" />
@@ -80,7 +80,7 @@ const SvgSms = (props) => (
     </g>
     <defs>
       <filter
-        id="SMS__filter0_d_0_1"
+        id="SMS__filter0_d_3_77"
         x={31}
         y={4.23349}
         width={39}
@@ -105,17 +105,17 @@ const SvgSms = (props) => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_0_1"
+          result="effect1_dropShadow_3_77"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_0_1"
+          in2="effect1_dropShadow_3_77"
           result="shape"
         />
       </filter>
       <filter
-        id="SMS__filter1_d_0_1"
+        id="SMS__filter1_d_3_77"
         x={39}
         y={5}
         width={36.5}
@@ -140,17 +140,17 @@ const SvgSms = (props) => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_0_1"
+          result="effect1_dropShadow_3_77"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_0_1"
+          in2="effect1_dropShadow_3_77"
           result="shape"
         />
       </filter>
       <filter
-        id="SMS__filter2_d_0_1"
+        id="SMS__filter2_d_3_77"
         x={47}
         y={17}
         width={38}
@@ -175,12 +175,12 @@ const SvgSms = (props) => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_0_1"
+          result="effect1_dropShadow_3_77"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_0_1"
+          in2="effect1_dropShadow_3_77"
           result="shape"
         />
       </filter>

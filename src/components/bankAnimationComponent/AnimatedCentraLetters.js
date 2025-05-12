@@ -47,19 +47,6 @@ export default function AnimatedCentralLetters() {
       }
     );
 
-    const dash = root.querySelector("#centralletters");
-    dash.addEventListener("mouseenter", () => {
-        gsap.to(dash, {
-          filter: "drop-shadow(0 0 1px #ffffff)",
-          duration: 0.3,
-        });
-      });
-    dash.addEventListener("mouseleave", () => {
-        gsap.to(dash, {
-          filter: "none",
-          duration: 0.3,
-      });
-    });
   }, []);
 
   return (

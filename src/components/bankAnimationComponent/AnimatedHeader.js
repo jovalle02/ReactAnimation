@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedCreditCard from "./AnimatedCreditCard";
 import AnimatedCloudBanks from "./AnimatedCloudBanks";
 import AnimatedAnalytic from "./AnimatedAnalytic";
@@ -15,16 +16,16 @@ import AnimatedPathsSVG from "./AnimatedPaths";
 import AnimatedCentraLetters from "./AnimatedCentraLetters";
 import AnimatedCircleGrid from "./AnimatedCircleGrid";
 
-function PositionedIcon({ innerRef, top, left, scale, children }) {
+gsap.registerPlugin(ScrollTrigger);
+
+function PositionedIcon({ innerRef, top, left, children }) {
   return (
     <div
       ref={innerRef}
       className="absolute w-[25%] h-[25%] flex flex-col items-center z-2"
       style={{ top, left }}
     >
-      <div
-        className="w-[100%] h-[100%] top-0 left-0 origin-center"
-      >
+      <div className="w-[100%] h-[100%] origin-center">
         {children}
       </div>
     </div>
@@ -32,6 +33,7 @@ function PositionedIcon({ innerRef, top, left, scale, children }) {
 }
 
 export default function AnimatedHeader() {
+  const container = useRef(null);
   const refs = {
     analytic: useRef(null),
     credit: useRef(null),
@@ -46,78 +48,86 @@ export default function AnimatedHeader() {
   };
 
   useEffect(() => {
-    const tl = gsap.timeline();
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
 
-    tl.from(refs.analytic.current, { opacity: 0, y: -30, duration: 0.6 })
-      .from(refs.credit.current, { opacity: 0, scale: 0.5, duration: 0.5 }, 0)
-      .from(refs.mobile.current, { opacity: 0, x: 50, duration: 0.5 }, 0)
-      .from(refs.lock.current, { opacity: 0, y: 30, duration: 0.5 }, 0)
-      .from(refs.mac.current, { opacity: 0, y: -30, duration: 0.5 }, 0)
-      .from(refs.fund.current, { opacity: 0, scale: 0.5, duration: 0.5 }, 0)
-      .from(refs.sms.current, { opacity: 0, x: -30, duration: 0.5 }, 0)
-      .from(refs.cloud.current, { opacity: 0, y: 40, duration: 0.5 }, 0)
-      .from(refs.exchange.current, { opacity: 0, scale: 0, duration: 0.6 }, 0)
-      .from(refs.wallet.current, { opacity: 0, scale: 0.8, duration: 0.6 }, 0);
+      tl.from(refs.analytic.current, { opacity: 0, y: -30, duration: 0.6 })
+        .from(refs.credit.current, { opacity: 0, scale: 0.5, duration: 0.5 }, 0)
+        .from(refs.mobile.current, { opacity: 0, x: 50, duration: 0.5 }, 0)
+        .from(refs.lock.current, { opacity: 0, y: 30, duration: 0.5 }, 0)
+        .from(refs.mac.current, { opacity: 0, y: -30, duration: 0.5 }, 0)
+        .from(refs.fund.current, { opacity: 0, scale: 0.5, duration: 0.5 }, 0)
+        .from(refs.sms.current, { opacity: 0, x: -30, duration: 0.5 }, 0)
+        .from(refs.cloud.current, { opacity: 0, y: 40, duration: 0.5 }, 0)
+        .from(refs.exchange.current, { opacity: 0, scale: 0, duration: 0.6 }, 0)
+        .from(refs.wallet.current, { opacity: 0, scale: 0.8, duration: 0.6 }, 0);
+    }, container);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div className="relative w-full h-full">
-
-      <PositionedIcon innerRef={refs.analytic} top="35%" left="5%" >
+    <div ref={container} className="relative w-full h-full">
+      <PositionedIcon innerRef={refs.analytic} top="35%" left="5%">
         <AnimatedAnalytic />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.credit} top="-6%" left="-5%" >
+      <PositionedIcon innerRef={refs.credit} top="-6%" left="-5%">
         <AnimatedCreditCard />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.mobile} top="-6%" left="23%" >
+      <PositionedIcon innerRef={refs.mobile} top="-6%" left="23%">
         <AnimatedPayApp />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.lock} top="17%" left="-5%" >
+      <PositionedIcon innerRef={refs.lock} top="17%" left="-5%">
         <AnimatedLockCard />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.mac} top="-5%" left="50%" >
+      <PositionedIcon innerRef={refs.mac} top="-5%" left="50%">
         <AnimatedMac />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.fund} top="55%" left="25%" >
+      <PositionedIcon innerRef={refs.fund} top="55%" left="25%">
         <AnimatedFundManagement />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.sms} top="55%" left="53%" >
+      <PositionedIcon innerRef={refs.sms} top="55%" left="53%">
         <AnimatedSMS />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.cloud} top="35%" left="48%" >
+      <PositionedIcon innerRef={refs.cloud} top="35%" left="48%">
         <AnimatedCloudBanks />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.exchange} top="17%" left="50%" >
+      <PositionedIcon innerRef={refs.exchange} top="17%" left="50%">
         <AnimatedExchange />
       </PositionedIcon>
 
-      <PositionedIcon innerRef={refs.wallet} top="55%" left="-5%" >
+      <PositionedIcon innerRef={refs.wallet} top="55%" left="-5%">
         <AnimatedDigitalWallet />
       </PositionedIcon>
 
       <div className="absolute top-[-36%] left-[-39%] inset-0 z-0 flex items-center justify-center">
-        <div className="w-[70%] h-[70%] aspect-square top-0 left-0 origin-center">
+        <div className="w-[70%] h-[70%] aspect-square origin-center">
           <AnimatedPathsSVG />
         </div>
       </div>
 
-
       <div className="absolute w-[55%] h-[55%] top-[9%] left-[6.5%] flex flex-col items-center z-[1]">
-        <div className="w-[100%] h-[100%] aspect-square origin-center top-0 left-0 origin-center">
+        <div className="w-[100%] h-[100%] aspect-square origin-center">
           <AnimatedCentraLetters />
         </div>
       </div>
 
-      <div className="absolute w-[140%] h-[140%]  top-[-26%] left-[-32%] flex items-center justify-center z-[0]">
-        <div className="w-[100%] h-[100%] aspect-square top-0 left-0 origin-center">
+      <div className="absolute w-[140%] h-[140%] top-[-26%] left-[-32%] flex items-center justify-center z-[0]">
+        <div className="w-[100%] h-[100%] aspect-square origin-center">
           <AnimatedCircleGrid className="w-full h-full" />
         </div>
       </div>
