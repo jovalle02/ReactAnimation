@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useLayoutEffect  } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
@@ -16,7 +16,7 @@ gsap.registerPlugin(
 export default function CICDPipelineSection() {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const orbitIcons = [
       { id: "#github",  path: "#firstOrbit", start: 0   },
       { id: "#jenkins", path: "#sndOrbit",   start: 0.3 },
@@ -25,16 +25,28 @@ export default function CICDPipelineSection() {
       { id: "#xray",    path: "#outerOrbit", start: 0.8 },
     ];
 
-    const ctx = gsap.context(() => {
-      // initial setup for icons
+    // reusable helper – we call it once now and again on every refresh
+    const prepIcons = () => {
       orbitIcons.forEach(({ id, path, start }) => {
         gsap.set(id, {
           opacity: 0,
           scale:   2,
-          motionPath: { path, align: path, alignOrigin: [0.5,0.5], autoRotate: false, start, end: start }
+          motionPath: {
+            path,
+            align: path,
+            alignOrigin: [0.5, 0.5],
+            autoRotate: false,
+            start,
+            end:   start              // nothing moves yet – just parks on the path
+          }
         });
       });
+    };
 
+    // initial setup…
+    prepIcons();
+
+    const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -43,71 +55,75 @@ export default function CICDPipelineSection() {
           scrub:   true,
           pin:     true,
           pinSpacing: true,
+          invalidateOnRefresh: true,   // ðŸ‘Œ  core part of the fix
         }
       });
 
-      // 1) Fade in center circle
-      tl.fromTo(
-        "#circle-center",
-        { opacity: 0, scale: 0.6 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
-        0
-      );
+      /* ---------- THE REST OF YOUR TIMELINE (unchanged) ---------- */
+      tl.fromTo("#circle-center",
+                { opacity: 0, scale: 0.6 },
+                { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" });
 
-      // 2) Mark the moment orbits start
       const od = 1.2;
-      tl.addLabel("orbitsStart", ">");
+      tl.addLabel("orbitsStart");
 
-      // 3) Draw all orbits (slightly staggered)
       tl.fromTo("#firstOrbit",
-        { drawSVG: "0% 0%", opacity: 0.3 },
-        { drawSVG: "0% 100%", opacity: 1, duration: od, ease: "power2.out" },
-        "orbitsStart"
-      )
-      .fromTo("#sndOrbit",
-        { drawSVG: "0% 0%", opacity: 0.3 },
-        { drawSVG: "0% 100%", opacity: 1, duration: od, ease: "power2.out" },
-        "orbitsStart+=0.2"
-      )
-      .fromTo("#trdOrbit",
-        { drawSVG: "0% 0%", opacity: 0.3 },
-        { drawSVG: "0% 100%", opacity: 1, duration: od, ease: "power2.out" },
-        "orbitsStart+=0.4"
-      )
-      .fromTo("#outerOrbit",
-        { drawSVG: "0% 0%", opacity: 0.3 },
-        { drawSVG: "0% 100%", opacity: 1, duration: od, ease: "power2.out" },
-        "orbitsStart+=0.6"
-      );
+                { drawSVG:"0% 0%", opacity:0.3 },
+                { drawSVG:"0% 100%", opacity:1, duration:od, ease:"power2.out" },
+                "orbitsStart")
+        .fromTo("#sndOrbit",
+                { drawSVG:"0% 0%", opacity:0.3 },
+                { drawSVG:"0% 100%", opacity:1, duration:od, ease:"power2.out" },
+                "orbitsStart+=0.2")
+        .fromTo("#trdOrbit",
+                { drawSVG:"0% 0%", opacity:0.3 },
+                { drawSVG:"0% 100%", opacity:1, duration:od, ease:"power2.out" },
+                "orbitsStart+=0.4")
+        .fromTo("#outerOrbit",
+                { drawSVG:"0% 0%", opacity:0.3 },
+                { drawSVG:"0% 100%", opacity:1, duration:od, ease:"power2.out" },
+                "orbitsStart+=0.6");
 
-      // 4) **Smooth in** text right at the same moment
-      tl.from("#cicd-title", {
-        opacity: 0,
-        y: 30,
-        duration: 1.2,
-        ease: "power2.out"
-      }, "orbitsStart");
+      tl.from("#cicd-title",
+              { opacity:0, y:30, duration:1.2, ease:"power2.out" },
+              "orbitsStart")
+        .from("#cicd-desc",
+              { opacity:0, y:20, duration:1.2, ease:"power2.out" },
+              "orbitsStart+=0.1");
 
-      tl.from("#cicd-desc", {
-        opacity: 0,
-        y: 20,
-        duration: 1.2,
-        ease: "power2.out"
-      }, "orbitsStart+=0.1");
-
-      // 5) Launch icons around their paths
       tl.addLabel("iconsCruise", `orbitsStart+=${od * 0.8}`);
+
       orbitIcons.forEach(({ id, path, start }) => {
         tl.to(id, {
           opacity: 1,
           scale:   3.5,
-          motionPath: { path, align: path, alignOrigin: [0.5,0.5], autoRotate: false, start, end: start + 0.3 },
-          duration: 1,
+          motionPath: {
+            path,
+            align:path,
+            alignOrigin:[0.5,0.5],
+            autoRotate:false,
+            start,
+            end:start+0.3
+          },
+          duration:1
         }, "iconsCruise");
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    /* 2) Whenever ScrollTrigger is about to *init* a refresh,
+          reset icons so they’re measured against the new SVG size */
+    ScrollTrigger.addEventListener("refreshInit", prepIcons);
+
+    /* 3) Make sure the page actually refreshes on resize */
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+
+    // cleanup on unmount
+    return () => {
+      window.removeEventListener("resize", onResize);
+      ScrollTrigger.removeEventListener("refreshInit", prepIcons);
+      ctx.revert();
+    };
   }, []);
 
   return (

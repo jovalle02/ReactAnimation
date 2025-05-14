@@ -1,4 +1,3 @@
-import AnimatedHeader from "@/components/bankAnimationComponent/AnimatedHeader";
 import CICDPipelineSection from "@/components/cidiSectionComponent/CICDPipelineSection";
 import TestResultsSection from "@/components/exampleComponent/TestResultSection";
 
